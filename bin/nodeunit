@@ -22,6 +22,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  --cov             generate coverage report\n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
@@ -36,6 +37,9 @@ args.forEach(function (arg) {
         config_file = arg.slice(9);
     } else if (arg === '--config') {
         config_param_found = true;
+    } else if (arg === '--cov') {
+        process.cov = true;
+        global.__cov = {};
     } else if (config_param_found) {
         config_file = arg;
         config_param_found = false;
